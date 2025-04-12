@@ -1,0 +1,21 @@
+<!-- Sidebar -->
+<div class="sidebar">
+    <div class="sidebar-header">
+        <h2>Admin Panel</h2>
+    </div>
+    
+    <nav>
+        <a href="/admin/dashboard" class="nav-item <%= path === '/admin/dashboard' ? 'active' : '' %>">
+            <i class="fas fa-tachometer-alt"></i>
+            Dashboard
+        </a>
+        <a href="/admin/admin-list" class="nav-item <%= path === '/admin/admin-list' ? 'active' : '' %>">
+            <i class="fas fa-users-cog"></i>
+            Admin List
+        </a>
+        <a href="/admin/logout" class="nav-item">
+            <i class="fas fa-sign-out-alt"></i>
+            Logout
+        </a>
+    </nav>
+</div> 
