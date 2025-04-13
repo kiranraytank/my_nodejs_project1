@@ -174,10 +174,10 @@
                                             </span>
                                         </td>
                                         <td class="action-buttons">
-                                            <button class="btn btn-icon btn-edit" onclick="editAdmin(<%= admin.id %>)">
+                                            <button class="btn btn-icon btn-edit" onclick="editAdmin('<%= admin.id %>')">
                                                 <i class="fas fa-edit"></i>
                                             </button>
-                                            <button class="btn btn-icon btn-delete" onclick="deleteAdmin(<%= admin.id %>)">
+                                            <button class="btn btn-icon btn-delete" onclick="deleteAdmin('<%= admin.id %>')">
                                                 <i class="fas fa-trash"></i>
                                             </button>
                                         </td>
@@ -658,9 +658,12 @@
 
         // Check for error message on page load
         document.addEventListener('DOMContentLoaded', function() {
-            <% if (typeof messages !== 'undefined' && messages && messages.error) { %>
+            if (typeof messages !== 'undefined' && messages && messages.error) { 
                 showErrorModal('<%= messages.error %>');
-            <% } %>
+            } 
+            // <% if (typeof messages !== 'undefined' && messages && messages.error) { %>
+            //     showErrorModal('<%= messages.error %>');
+            // <% } %>
         });
 
         // Delete confirmation modal functionality
