@@ -13,6 +13,9 @@
         <div class="sidebar">
             <div class="sidebar-header">
                 <h2>Admin Panel</h2>
+                <button class="menu-toggle" onclick="toggleSidebar()">
+                    <i class="fas fa-bars"></i>
+                </button>
             </div>
             <nav>
                 <a href="/admin/dashboard" class="nav-item <%= currentPage === 'dashboard' ? 'active' : '' %>">
@@ -57,5 +60,24 @@
     <% if (typeof scripts !== 'undefined') { %>
         <%- scripts %>
     <% } %>
+
+    <script>
+        function toggleSidebar() {
+            const sidebar = document.querySelector('.sidebar');
+            sidebar.classList.toggle('show');
+        }
+
+        // Close sidebar when clicking outside on mobile
+        document.addEventListener('click', function(event) {
+            const sidebar = document.querySelector('.sidebar');
+            const menuToggle = document.querySelector('.menu-toggle');
+            
+            if (window.innerWidth <= 768 && 
+                !sidebar.contains(event.target) && 
+                !menuToggle.contains(event.target)) {
+                sidebar.classList.remove('show');
+            }
+        });
+    </script>
 </body>
 </html> 

@@ -5,21 +5,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin Login</title>
     <style>
-        * {
+        body {
             margin: 0;
             padding: 0;
-            box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        }
-
-        body {
+            font-family: Arial, sans-serif;
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             height: 100vh;
             display: flex;
             align-items: center;
             justify-content: center;
         }
-
         .login-container {
             background: rgba(255, 255, 255, 0.95);
             padding: 2rem;
@@ -29,35 +24,24 @@
             max-width: 400px;
             margin: 1rem;
         }
-
         .login-header {
             text-align: center;
             margin-bottom: 2rem;
         }
-
-        .login-header h2 {
+        .login-header h1 {
             color: #333;
             font-size: 2rem;
             margin-bottom: 0.5rem;
         }
-
-        .login-header p {
-            color: #666;
-            font-size: 0.9rem;
-        }
-
         .form-group {
             margin-bottom: 1.5rem;
-            position: relative;
         }
-
         .form-group label {
             display: block;
             margin-bottom: 0.5rem;
-            color: #555;
+            color: #333;
             font-weight: 500;
         }
-
         .form-group input {
             width: 100%;
             padding: 12px;
@@ -66,22 +50,11 @@
             font-size: 1rem;
             transition: border-color 0.3s ease;
         }
-
         .form-group input:focus {
             border-color: #667eea;
             outline: none;
         }
-
-        .error-message {
-            color: #ff4444;
-            background: #ffebee;
-            padding: 10px;
-            border-radius: 5px;
-            margin-bottom: 1rem;
-            font-size: 0.9rem;
-        }
-
-        .login-btn {
+        .btn-login {
             width: 100%;
             padding: 12px;
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
@@ -93,27 +66,14 @@
             cursor: pointer;
             transition: transform 0.2s ease;
         }
-
-        .login-btn:hover {
+        .btn-login:hover {
             transform: translateY(-2px);
         }
-
-        .register-link {
+        .error-message {
+            color: #e74c3c;
             text-align: center;
-            margin-top: 1.5rem;
-            font-size: 0.9rem;
+            margin-bottom: 1rem;
         }
-
-        .register-link a {
-            color: #667eea;
-            text-decoration: none;
-            font-weight: 500;
-        }
-
-        .register-link a:hover {
-            text-decoration: underline;
-        }
-
         @media (max-width: 480px) {
             .login-container {
                 margin: 1rem;
@@ -125,31 +85,22 @@
 <body>
     <div class="login-container">
         <div class="login-header">
-            <h2>Admin Login</h2>
-            <p>Welcome back! Please login to your account</p>
+            <h1>Admin Login</h1>
         </div>
-
         <% if (typeof error !== 'undefined' && error) { %>
             <div class="error-message"><%= error %></div>
         <% } %>
-
         <form action="/admin/login" method="POST">
             <div class="form-group">
-                <label for="email">Email Address</label>
-                <input type="email" id="email" name="email" required placeholder="Enter your email">
+                <label for="email">Email</label>
+                <input type="email" id="email" name="email" required>
             </div>
-            
             <div class="form-group">
                 <label for="password">Password</label>
-                <input type="password" id="password" name="password" required placeholder="Enter your password">
+                <input type="password" id="password" name="password" required>
             </div>
-
-            <button type="submit" class="login-btn">Login</button>
+            <button type="submit" class="btn-login">Login</button>
         </form>
-
-        <div class="register-link">
-            Don't have an account? <a href="/admin/register">Register here</a>
-        </div>
     </div>
 </body>
 </html>

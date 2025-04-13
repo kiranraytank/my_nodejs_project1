@@ -20,6 +20,17 @@ router.get('/list', isAuthenticated, adminController.adminList);
 router.get('/add', isAuthenticated, adminController.showAddForm);
 router.post('/add', isAuthenticated, adminController.addAdmin);
 
+// Get Admin Routes
+router.get('/get/:id', isAuthenticated, adminController.getAdmin);
+
+// Update Admin Routes
+router.post('/update', isAuthenticated, adminController.updateAdmin);
+
+// Delete Admin Route - Handle both DELETE and POST methods
+router.delete('/delete/:id', isAuthenticated, adminController.deleteAdmin);
+router.post('/delete/:id', isAuthenticated, adminController.deleteAdmin);
+
+
 // Logout Route
 router.get('/logout', adminController.logout);
 

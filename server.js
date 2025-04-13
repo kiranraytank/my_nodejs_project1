@@ -42,7 +42,7 @@ app.use((err, req, res, next) => {
     res.status(500).send('Something broke!');
 });
 
-// Catch-all route for non-admin routes
+// Catch-all route for non-admin routes (only for GET requests)
 app.get('*', (req, res) => {
     if (req.session && req.session.adminId) {
         res.redirect('/admin/dashboard');
@@ -62,5 +62,6 @@ app.listen(PORT, () => {
     console.log('- GET /admin/list -> admin list (requires auth)');
     console.log('- GET /admin/add -> add admin form (requires auth)');
     console.log('- POST /admin/add -> add admin handler (requires auth)');
+    console.log('- POST /admin/delete/:id -> delete admin (requires auth)');
     console.log('- GET /admin/logout -> logout handler');
 });
