@@ -11,9 +11,6 @@ const app = express();
 // Set views directory // Set up EJS
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
-// app.use(expressLayouts);
-// app.set('layout', 'admin/layout/admin-layout');
-
 
 // Middleware
 app.use(express.json());
