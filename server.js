@@ -3,13 +3,17 @@ const express = require('express');
 const session = require('express-session');
 const path = require('path');
 const dotenv = require('dotenv');
+const expressLayouts = require('express-ejs-layouts');
 
 dotenv.config();
 const app = express();
 
-// Set views directory
+// Set views directory // Set up EJS
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
+// app.use(expressLayouts);
+// app.set('layout', 'admin/layout/admin-layout');
+
 
 // Middleware
 app.use(express.json());
@@ -26,6 +30,11 @@ app.use(express.static(path.join(__dirname, 'public')));
 // Admin Routes
 const adminRoutes = require('./routes/admin');
 app.use('/admin', adminRoutes);
+
+
+// Users Routes
+const userRoutes = require('./routes/user');
+app.use('/user', userRoutes);
 
 // Root route
 app.get('/', (req, res) => {
@@ -54,14 +63,4 @@ app.get('*', (req, res) => {
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
     console.log(`Server running on port ${PORT}`);
-    console.log('Available routes:');
-    console.log('- GET / -> redirects to /admin/login or /admin/dashboard');
-    console.log('- GET /admin/login -> login page');
-    console.log('- POST /admin/login -> login handler');
-    console.log('- GET /admin/dashboard -> dashboard (requires auth)');
-    console.log('- GET /admin/list -> admin list (requires auth)');
-    console.log('- GET /admin/add -> add admin form (requires auth)');
-    console.log('- POST /admin/add -> add admin handler (requires auth)');
-    console.log('- POST /admin/delete/:id -> delete admin (requires auth)');
-    console.log('- GET /admin/logout -> logout handler');
 });

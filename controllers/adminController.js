@@ -319,7 +319,41 @@ const adminController = {
       console.error('Delete admin error:', error);
       res.status(500).json({ success: false, error: 'Failed to delete admin' });
     }
-  }
+  },
+
+  
+  userList: async (req, res) => {
+    try {
+      // Check if user is authenticated
+      if (!req.session.adminId) {
+        return res.redirect('/admin/login');
+      }
+
+      // Get all admin users (excluding soft-deleted)
+      const [users] = await pool.query('SELECT * FROM users WHERE deleted_at IS NULL ORDER BY created_at DESC');
+      
+      // Initialize messages object
+      const messages = {
+        success: req.session.success || null,
+        error: req.session.error || null
+      };
+      
+      // Clear session messages
+      delete req.session.success;
+      delete req.session.error;
+      
+      res.render('admin/user-list', {
+        user: users,
+        title: 'Users List',
+        messages: messages,
+        currentSection: 'user-list'
+      });
+    } catch (error) {
+      console.error('User list error:', error);
+      res.redirect('/admin/login');
+    }
+  },
+
 };
 
 module.exports = adminController;
