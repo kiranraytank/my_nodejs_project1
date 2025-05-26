@@ -1,0 +1,210 @@
+<%- include('./../admin/partials/header') %>
+
+<div class="container mt-4">
+    <h2>Labour Management System</h2>
+
+    <!-- Create New Task Form -->
+    <div class="card mb-4">
+        <div class="card-header">
+            <h4>Create New Labour Task</h4>
+        </div>
+        <div class="card-body">
+            <form action="/labour/tasks" method="POST">
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label for="task_name">Task Name</label>
+                            <input type="text" class="form-control" id="task_name" name="task_name" required>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label for="daily_wage">Daily Wage</label>
+                            <input type="number" class="form-control" id="daily_wage" name="daily_wage" step="0.01" required>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label for="description">Description</label>
+                            <input type="text" class="form-control" id="description" name="description">
+                        </div>
+                    </div>
+                </div>
+                <button type="submit" class="btn btn-primary mt-3">Create Task</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Create New Assignment Form -->
+    <div class="card mb-4">
+        <div class="card-header">
+            <h4>Assign Labour</h4>
+        </div>
+        <div class="card-body">
+            <form action="/labour/assignments" method="POST">
+                <div class="row">
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label for="user_id">User</label>
+                            <select class="form-control" id="user_id" name="user_id" required>
+                                <option value="">Select User</option>
+                                <% users.forEach(user => { %>
+                                    <option value="<%= user.id %>"><%= user.user_name %></option>
+                                <% }); %>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label for="task_id">Task</label>
+                            <select class="form-control" id="task_id" name="task_id" required>
+                                <option value="">Select Task</option>
+                                <% tasks.forEach(task => { %>
+                                    <option value="<%= task.task_id %>"><%= task.task_name %></option>
+                                <% }); %>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-md-2">
+                        <div class="form-group">
+                            <label for="start_date">Start Date</label>
+                            <input type="date" class="form-control" id="start_date" name="start_date" required>
+                        </div>
+                    </div>
+                    <div class="col-md-2">
+                        <div class="form-group">
+                            <label for="end_date">End Date</label>
+                            <input type="date" class="form-control" id="end_date" name="end_date" required>
+                        </div>
+                    </div>
+                    <div class="col-md-2">
+                        <div class="form-group">
+                            <label for="days_worked">Days Worked</label>
+                            <input type="number" class="form-control" id="days_worked" name="days_worked" required>
+                        </div>
+                    </div>
+                </div>
+                <button type="submit" class="btn btn-primary mt-3">Create Assignment</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Assignments Table -->
+    <div class="card">
+        <div class="card-header">
+            <h4>Labour Assignments</h4>
+            <div class="row mt-3">
+                <div class="col-md-3">
+                    <select class="form-control" id="filter_user">
+                        <option value="">All Users</option>
+                        <% users.forEach(user => { %>
+                            <option value="<%= user.id %>"><%= user.username %></option>
+                        <% }); %>
+                    </select>
+                </div>
+                <div class="col-md-3">
+                    <select class="form-control" id="filter_task">
+                        <option value="">All Tasks</option>
+                        <% tasks.forEach(task => { %>
+                            <option value="<%= task.task_id %>"><%= task.task_name %></option>
+                        <% }); %>
+                    </select>
+                </div>
+                <div class="col-md-3">
+                    <input type="date" class="form-control" id="filter_start_date" placeholder="Start Date">
+                </div>
+                <div class="col-md-3">
+                    <input type="date" class="form-control" id="filter_end_date" placeholder="End Date">
+                </div>
+            </div>
+        </div>
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>User</th>
+                            <th>Task</th>
+                            <th>Start Date</th>
+                            <th>End Date</th>
+                            <th>Days Worked</th>
+                            <th>Daily Wage</th>
+                            <th>Total Amount</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody id="assignmentsTable">
+                        <% assignments.forEach(assignment => { %>
+                            <tr>
+                                <td><%= assignment.username %></td>
+                                <td><%= assignment.task_name %></td>
+                                <td><%= new Date(assignment.start_date).toLocaleDateString() %></td>
+                                <td><%= new Date(assignment.end_date).toLocaleDateString() %></td>
+                                <td><%= assignment.days_worked %></td>
+                                <td>₹<%= assignment.daily_wage %></td>
+                                <td>₹<%= (assignment.days_worked * assignment.daily_wage).toFixed(2) %></td>
+                                <td>
+                                    <a href="/labour/salary-slip/<%= assignment.assignment_id %>" 
+                                       class="btn btn-sm btn-primary" 
+                                       target="_blank">
+                                        Generate Slip
+                                    </a>
+                                </td>
+                            </tr>
+                        <% }); %>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const filterUser = document.getElementById('filter_user');
+    const filterTask = document.getElementById('filter_task');
+    const filterStartDate = document.getElementById('filter_start_date');
+    const filterEndDate = document.getElementById('filter_end_date');
+
+    function applyFilters() {
+        const params = new URLSearchParams({
+            user_id: filterUser.value,
+            task_id: filterTask.value,
+            start_date: filterStartDate.value,
+            end_date: filterEndDate.value
+        });
+
+        fetch(`/labour/assignments/filter?${params}`)
+            .then(response => response.json())
+            .then(assignments => {
+                const tbody = document.getElementById('assignmentsTable');
+                tbody.innerHTML = assignments.map(assignment => `
+                    <tr>
+                        <td>${assignment.username}</td>
+                        <td>${assignment.task_name}</td>
+                        <td>${new Date(assignment.start_date).toLocaleDateString()}</td>
+                        <td>${new Date(assignment.end_date).toLocaleDateString()}</td>
+                        <td>${assignment.days_worked}</td>
+                        <td>₹${assignment.daily_wage}</td>
+                        <td>₹${(assignment.days_worked * assignment.daily_wage).toFixed(2)}</td>
+                        <td>
+                            <a href="/labour/salary-slip/${assignment.assignment_id}" 
+                               class="btn btn-sm btn-primary" 
+                               target="_blank">
+                                Generate Slip
+                            </a>
+                        </td>
+                    </tr>
+                `).join('');
+            })
+            .catch(error => console.error('Error:', error));
+    }
+
+    filterUser.addEventListener('change', applyFilters);
+    filterTask.addEventListener('change', applyFilters);
+    filterStartDate.addEventListener('change', applyFilters);
+    filterEndDate.addEventListener('change', applyFilters);
+});
+</script>
+
+<%- include('./../admin/partials/footer') %> 

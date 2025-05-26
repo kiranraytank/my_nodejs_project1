@@ -1,4 +1,4 @@
-const Admin = require('../models/admin');
+const Admin = require('./../models/admin');
 const bcrypt = require('bcrypt');
 const pool = require('../config/database');
 
@@ -331,6 +331,7 @@ const adminController = {
 
       // Get all admin users (excluding soft-deleted)
       const [users] = await pool.query('SELECT * FROM users WHERE deleted_at IS NULL ORDER BY created_at DESC');
+      const [roles] = await pool.query('SELECT * FROM roles');
       
       // Initialize messages object
       const messages = {
@@ -344,6 +345,7 @@ const adminController = {
       
       res.render('admin/user-list', {
         user: users,
+        roles: roles,
         title: 'Users List',
         messages: messages,
         currentSection: 'user-list'

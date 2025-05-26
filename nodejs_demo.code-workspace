@@ -2,6 +2,12 @@
 	"folders": [
 		{
 			"path": "."
+		},
+		{
+			"path": "../html_1st_demo"
+		},
+		{
+			"path": "../python_learn"
 		}
 	]
 }

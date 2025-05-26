@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Our Team - Company Name</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            background-color: #f8f9fa;
+            color: #333;
+            line-height: 1.6;
+        }
+
+        /* Header and Navigation Styles */
+        header {
+            background-color: #fff;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+        }
+
+        header .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+            color: #007bff;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 30px;
+        }
+
+        nav ul li a {
+            text-decoration: none;
+            color: #333;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        nav ul li a:hover {
+            color: #007bff;
+        }
+
+        /* Adjust main container for fixed header */
+        .main-container {
+            padding-top: 80px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+
+        /* Header Section */
+        .header-section {
+            margin-bottom: 60px;
+        }
+
+        .company-name {
+            font-size: 24px;
+            color: #333;
+            margin-bottom: 40px;
+        }
+
+        /* Team Leader Section */
+        .team-leader {
+            display: flex;
+            gap: 40px;
+            margin-bottom: 60px;
+        }
+
+        .leader-content {
+            flex: 1;
+        }
+
+        .leader-image {
+            flex: 0 0 400px;
+        }
+
+        .leader-image img {
+            width: 100%;
+            height: auto;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+
+        .leader-name {
+            font-size: 24px;
+            margin-bottom: 10px;
+        }
+
+        .leader-title {
+            color: #666;
+            font-style: italic;
+            margin-bottom: 20px;
+        }
+
+        .leader-description {
+            margin-bottom: 30px;
+        }
+
+        .schedule-btn {
+            display: inline-block;
+            padding: 12px 24px;
+            background-color: #007bff;
+            color: white;
+            text-decoration: none;
+            border-radius: 4px;
+            transition: background-color 0.3s;
+        }
+
+        .schedule-btn:hover {
+            background-color: #0056b3;
+        }
+
+        /* Image Gallery */
+        .image-gallery {
+            display: flex;
+            gap: 20px;
+            overflow-x: auto;
+            margin-bottom: 60px;
+            padding: 20px 0;
+        }
+
+        .gallery-image {
+            flex: 0 0 200px;
+            height: 150px;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        .gallery-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        /* Team Members Section */
+        .team-section {
+            margin-bottom: 60px;
+        }
+
+        .section-title {
+            font-size: 28px;
+            margin-bottom: 40px;
+            color: #444;
+        }
+
+        .team-member {
+            display: flex;
+            gap: 40px;
+            margin-bottom: 60px;
+        }
+
+        .member-content {
+            flex: 1;
+        }
+
+        .member-image {
+            flex: 0 0 300px;
+        }
+
+        .member-image img {
+            width: 100%;
+            height: auto;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+
+        .member-name {
+            font-size: 20px;
+            margin-bottom: 10px;
+        }
+
+        .member-title {
+            color: #666;
+            font-style: italic;
+            margin-bottom: 20px;
+        }
+
+        .member-description {
+            color: #555;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .team-leader,
+            .team-member {
+                flex-direction: column;
+            }
+
+            .leader-image,
+            .member-image {
+                flex: 0 0 auto;
+                margin-bottom: 20px;
+            }
+
+            .gallery-image {
+                flex: 0 0 150px;
+                height: 120px;
+            }
+
+            header .container {
+                flex-direction: column;
+                padding: 10px;
+            }
+
+            .logo {
+                margin-bottom: 10px;
+            }
+
+            nav ul {
+                gap: 15px;
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+
+            .main-container {
+                padding-top: 120px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Add Header Navigation -->
+    <header>
+        <div class="container">
+            <div class="logo">Your Brand</div>
+            <nav>
+                <ul>
+                    <li><a href="#">Home</a></li>
+                    <li><a href="#features">Features</a></li>
+                    <li><a href="#about">About</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Wrap existing content in main-container -->
+    <div class="main-container">
+        <div class="container">
+            <!-- Header Section -->
+            <div class="header-section">
+                <h1 class="company-name">Company Name</h1>
+            </div>
+
+            <!-- Team Leader Section -->
+            <div class="team-leader">
+                <div class="leader-content">
+                    <h2 class="leader-name">John Smith</h2>
+                    <p class="leader-title">Lead Consultant & Founder</p>
+                    <p class="leader-description">
+                        With over 20 years of experience in the industry, John has a tremendous passion for excellence, 
+                        grounded in extensive education and practical experience. His collaborative approach and deep 
+                        industry knowledge have helped countless clients achieve their goals.
+                    </p>
+                    <p class="leader-description">
+                        The relationships he has cultivated with partners across the globe are intrinsic to 
+                        how he and his team enhance each project with exceptional skill and facilitate the 
+                        best possible outcomes for clients.
+                    </p>
+                    <a href="#" class="schedule-btn">SCHEDULE A CONSULTATION</a>
+                </div>
+                <div class="leader-image">
+                    <img src="https://via.placeholder.com/400x500" alt="John Smith">
+                </div>
+            </div>
+
+            <!-- Image Gallery -->
+            <div class="image-gallery">
+                <div class="gallery-image">
+                    <img src="https://via.placeholder.com/200x150" alt="Gallery 1">
+                </div>
+                <div class="gallery-image">
+                    <img src="https://via.placeholder.com/200x150" alt="Gallery 2">
+                </div>
+                <div class="gallery-image">
+                    <img src="https://via.placeholder.com/200x150" alt="Gallery 3">
+                </div>
+                <div class="gallery-image">
+                    <img src="https://via.placeholder.com/200x150" alt="Gallery 4">
+                </div>
+                <div class="gallery-image">
+                    <img src="https://via.placeholder.com/200x150" alt="Gallery 5">
+                </div>
+            </div>
+
+            <!-- Team Members Section -->
+            <div class="team-section">
+                <h2 class="section-title">THE TEAM</h2>
+
+                <!-- Team Member 1 -->
+                <div class="team-member">
+                    <div class="member-content">
+                        <h3 class="member-name">Sarah Johnson</h3>
+                        <p class="member-title">Associate Consultant & Lead Designer</p>
+                        <p class="member-description">
+                            Born and raised in New York, Sarah studied design at prestigious institutions. 
+                            She brings her background in architecture and design to create unique solutions 
+                            for clients. Her meticulous nature and creative approach have been instrumental 
+                            in numerous successful projects.
+                        </p>
+                        <p class="member-description">
+                            Sarah has been an integral team member since 2017, supporting clients throughout 
+                            their journey. She enhances each project with her knowledge of space, light, and 
+                            materials, as well as her innovative approach to problem-solving.
+                        </p>
+                    </div>
+                    <div class="member-image">
+                        <img src="https://via.placeholder.com/300x400" alt="Sarah Johnson">
+                    </div>
+                </div>
+
+                <!-- Team Member 2 -->
+                <div class="team-member">
+                    <div class="member-content">
+                        <h3 class="member-name">Michael Chen</h3>
+                        <p class="member-title">Business Manager & Operations Lead</p>
+                        <p class="member-description">
+                            Michael graduated from business school with honors and brings over a decade of 
+                            experience in project management. His expertise in operations and strategy has 
+                            helped streamline our processes and improve client satisfaction.
+                        </p>
+                        <p class="member-description">
+                            Since joining in 2020, he has contributed high-level business and organizational 
+                            support. His international experience and market knowledge are valuable assets in 
+                            managing and building successful client relationships.
+                        </p>
+                    </div>
+                    <div class="member-image">
+                        <img src="https://via.placeholder.com/300x400" alt="Michael Chen">
+                    </div>
+                </div>
+
+                <!-- Team Member 3 -->
+                <div class="team-member">
+                    <div class="member-content">
+                        <h3 class="member-name">Robert Wilson</h3>
+                        <p class="member-title">Operations Manager & Technical Lead</p>
+                        <p class="member-description">
+                            Early in Robert's career, he worked in various technical roles, developing a 
+                            strong foundation in project execution and team management. His experience spans 
+                            multiple industries and includes managing large-scale operations.
+                        </p>
+                        <p class="member-description">
+                            Robert has been with the company since 2015 and has managed operations across 
+                            multiple departments. His expertise in technical implementation and project 
+                            management has been crucial to our success.
+                        </p>
+                    </div>
+                    <div class="member-image">
+                        <img src="https://via.placeholder.com/300x400" alt="Robert Wilson">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html> 

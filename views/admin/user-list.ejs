@@ -164,6 +164,7 @@
                                     <th>ID</th>
                                     <th>Name</th>
                                     <th>Email</th>
+                                    <th>Role</th>
                                     <th>Status</th>
                                     <th>Actions</th>
                                 </tr>
@@ -175,6 +176,11 @@
                                             <td><%= user.id %></td>
                                             <td><%= user.name %></td>
                                             <td><%= user.email %></td>
+                                            <td>
+                                                <span class="role-badge <%= user.role_name === 'manager' ? 'role-manager' : user.role_name === 'labare' ? 'role-labare' : 'role-contacter' %>">
+                                                    <%= user.role_name %>
+                                                </span>
+                                            </td>
                                             <td>
                                                 <span class="status-badge <%= user.status == 1 ? 'status-active' : 'status-inactive' %>">
                                                     <%= user.status == 1 ? 'Active' : 'Inactive' %>
@@ -223,6 +229,17 @@
                         <label for="email">Email Address</label>
                         <input type="email" id="email" name="email" required placeholder="Enter email address">
                         <div class="error-message" id="emailError"></div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="role_id">Role</label>
+                        <select id="role_id" name="role_id" required>
+                            <option value="">Select Role</option>
+                            <% roles.forEach(role => { %>
+                                <option value="<%= role.id %>"><%= role.name %></option>
+                            <% }); %>
+                        </select>
+                        <div class="error-message" id="roleError"></div>
                     </div>
 
                     <div class="form-group">
@@ -281,6 +298,15 @@
                         <label for="editEmail">Email</label>
                         <input type="email" id="editEmail" name="email" class="form-control" required>
                         <div class="error-message" id="editEmailError"></div>
+                    </div>
+                    <div class="form-group">
+                        <label for="editRole">Role</label>
+                        <select id="editRole" name="role_id" class="form-control" required>
+                            <% roles.forEach(role => { %>
+                                <option value="<%= role.id %>"><%= role.name %></option>
+                            <% }); %>
+                        </select>
+                        <div class="error-message" id="editRoleError"></div>
                     </div>
                     <div class="form-group">
                         <label for="editStatus">Status</label>
@@ -443,6 +469,7 @@
                 const data = {
                     name: formData.get('name'),
                     email: formData.get('email'),
+                    role_id: formData.get('role_id'),
                     status: formData.get('status')
                 };
 
@@ -499,13 +526,15 @@
                     const edituserId = document.getElementById('edituserId');
                     const editName = document.getElementById('editName');
                     const editEmail = document.getElementById('editEmail');
+                    const editRole = document.getElementById('editRole');
                     const editStatus = document.getElementById('editStatus');
                     const modal = document.getElementById('edituserModal');
 
-                    if (edituserId && editName && editEmail && editStatus && modal) {
+                    if (edituserId && editName && editEmail && editRole && editStatus && modal) {
                         edituserId.value = user.id;
                         editName.value = user.name;
                         editEmail.value = user.email;
+                        editRole.value = user.role_id;
                         editStatus.value = user.status;
                         modal.style.display = 'block';
                     }
@@ -541,7 +570,13 @@
                 if (!form) return;
 
                 const formData = new FormData(form);
-                const data = Object.fromEntries(formData.entries());
+                const data = {
+                    id: formData.get('id'),
+                    name: formData.get('name'),
+                    email: formData.get('email'),
+                    role_id: formData.get('role_id'),
+                    status: formData.get('status')
+                };
 
                 // Clear previous errors
                 document.querySelectorAll('.error-message').forEach(el => {
@@ -975,6 +1010,48 @@
             .action-buttons {
                 justify-content: center;
             }
+        }
+
+        /* Add these new styles */
+        .role-badge {
+            display: inline-block;
+            padding: 0.35rem 0.65rem;
+            border-radius: 50rem;
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-align: center;
+            white-space: nowrap;
+            vertical-align: baseline;
+        }
+
+        .role-manager {
+            background-color: #cce5ff;
+            color: #004085;
+        }
+
+        .role-labare {
+            background-color: #d4edda;
+            color: #155724;
+        }
+
+        .role-contacter {
+            background-color: #fff3cd;
+            color: #856404;
+        }
+
+        select.form-control {
+            width: 100%;
+            padding: 8px 12px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 1rem;
+            background-color: white;
+        }
+
+        select.form-control:focus {
+            border-color: #80bdff;
+            outline: 0;
+            box-shadow: 0 0 0 0.2rem rgba(0,123,255,.25);
         }
     </style>
 </body>

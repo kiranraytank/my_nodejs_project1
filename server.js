@@ -33,6 +33,15 @@ app.use('/admin', adminRoutes);
 const userRoutes = require('./routes/user');
 app.use('/user', userRoutes);
 
+
+// Users Routes
+const roleRoutes = require('./routes/roles');
+app.use('/roles', roleRoutes);
+
+// Labour Routes
+const labourRoutes = require('./routes/labourRoutes');
+app.use('/labour', labourRoutes);
+
 // Root route
 app.get('/', (req, res) => {
     if (req.session && req.session.adminId) {
